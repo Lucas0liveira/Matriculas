@@ -1,0 +1,22 @@
+{
+  "name": "trabalho-lbd",
+  "version": "1.0.0",
+  "description": "Uma aplicação web para listar seus livros",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lucas0liveira/Bookfull.git"
+  },
+  "keywords": [
+    "books"
+  ],
+  "author": "Leonardo Oliveira Freitas & Lucas Oliveira Freitas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lucas0liveira/Bookfull/issues"
+  },
+  "homepage": "https://github.com/Lucas0liveira/Bookfull#readme"
+}
