@@ -14,6 +14,12 @@ Após a clonagem do repositório, abra a pasta do projeto em seu console. Em seg
 
 `npm start`
 
-`cd frontend/matriculas`
+O back end da aplicação agora está funcionando. Para iniciar o front end seguimos com:
+
+`cd frontend`
+
+`npm install`
+
+`cd matriculas`
 
 `npx serve`
