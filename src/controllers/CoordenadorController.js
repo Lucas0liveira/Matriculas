@@ -3,7 +3,12 @@ const Coordenador = require('../model/Coordenador');
 module.exports = {
 
   async indexAll(req, res) {
-    const coordenador = await Coordenador.findAll();
+    const coordenador = await Coordenador.findAll({
+      include: {
+        association: 'curso',
+        attributes: ['nome_curso'],
+      },
+    });
 
     if (!coordenador) {
       return res.status(400).json({ erro: 'Nenhum coordenador encontrado.' });
@@ -14,7 +19,12 @@ module.exports = {
   async indexOne(req, res) {
     const { id } = req.params;
 
-    const coordenador = await Coordenador.findByPk(id);
+    const coordenador = await Coordenador.findByPk(id, {
+      include: {
+        association: 'curso',
+        attributes: ['nome_curso'],
+      },
+    });
 
     if (!coordenador) {
       return res.status(400).json({ erro: 'Coordenador não encontrado.' });

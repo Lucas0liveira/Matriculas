@@ -13,7 +13,7 @@ class Professor extends Model {
   }
 
   static associate(models) {
-    this.hasMany(models.Disciplina, { foreignKey: 'id', as: 'id_professor' });
+    this.hasMany(models.Disciplina, { foreignKey: 'id', as: 'disciplinas' });
   }
 }
 

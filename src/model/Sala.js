@@ -14,7 +14,7 @@ class Sala extends Model {
   }
 
   static associate(models) {
-    this.hasMany(models.Disciplina, { foreignKey: 'numero_sala', as: 'sala' });
+    this.hasMany(models.Disciplina, { foreignKey: 'numero_sala', as: 'disciplinas' });
   }
 }
 

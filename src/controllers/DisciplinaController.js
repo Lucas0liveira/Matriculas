@@ -2,11 +2,43 @@
 
 const Disciplina = require('../model/Disciplina');
 const Curso = require('../model/Curso');
+const Aluno = require('../model/Aluno');
+const Professor = require('../model/Professor');
+const Sala = require('../model/Sala');
 
 module.exports = {
 
   async indexAll(req, res) {
-    const disciplina = await Disciplina.findAll();
+    const disciplina = await Disciplina.findAll({
+      include: [
+        {
+          model: Curso,
+          as: 'cursos',
+          attributes: ['id', 'nome_curso'],
+          through: {
+            attributes: [],
+          },
+        },
+        {
+          model: Aluno,
+          as: 'alunos',
+          attributes: ['id', 'rga'],
+          through: {
+            attributes: [],
+          },
+        },
+        {
+          model: Sala,
+          as: 'sala',
+          attributes: ['numero', 'complexo'],
+        },
+        {
+          model: Professor,
+          as: 'professor',
+          attributes: ['id', 'nome', 'email'],
+        },
+      ],
+    });
 
     if (!disciplina) {
       return res.status(400).json({ erro: 'Nenhuma disciplina encontrada.' });
@@ -17,7 +49,36 @@ module.exports = {
   async indexOne(req, res) {
     const { id } = req.params;
 
-    const disciplina = await Disciplina.findByPk(id);
+    const disciplina = await Disciplina.findByPk(id, {
+      include: [
+        {
+          model: Curso,
+          as: 'cursos',
+          attributes: ['id', 'nome_curso'],
+          through: {
+            attributes: [],
+          },
+        },
+        {
+          model: Aluno,
+          as: 'alunos',
+          attributes: ['id', 'rga'],
+          through: {
+            attributes: [],
+          },
+        },
+        {
+          model: Sala,
+          as: 'sala',
+          attributes: ['numero', 'complexo'],
+        },
+        {
+          model: Professor,
+          as: 'professor',
+          attributes: ['id', 'nome', 'email'],
+        },
+      ],
+    });
 
     if (!disciplina) {
       return res.status(400).json({ erro: 'Disciplina não encontrada.' });

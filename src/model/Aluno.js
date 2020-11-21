@@ -16,6 +16,13 @@ class Aluno extends Model {
       rga: DataTypes.STRING,
       nome: DataTypes.STRING,
       email: DataTypes.STRING,
+      curso: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: { model: 'curso', key: 'numero' },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
+      },
     },
     {
       hooks: {
@@ -45,7 +52,8 @@ class Aluno extends Model {
   }
 
   static associate(models) {
-    this.belongsToMany(models.Disciplina, { foreignKey: 'id_aluno', through: 'aluno_disciplina', as: 'disciplina' });
+    this.belongsToMany(models.Disciplina, { foreignKey: 'id_aluno', through: 'aluno_disciplina', as: 'disciplinas' });
+    this.belongsTo(models.Curso, { foreignKey: 'curso', as: 'curso_do_aluno' });
   }
 }
 

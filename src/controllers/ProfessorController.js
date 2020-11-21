@@ -3,7 +3,12 @@ const Professor = require('../model/Professor');
 module.exports = {
 
   async indexAll(req, res) {
-    const professor = await Professor.findAll();
+    const professor = await Professor.findAll({
+      include: {
+        association: 'disciplinas',
+        attributes: ['id', 'nome_disciplina'],
+      },
+    });
 
     if (!professor) {
       return res.json({ erro: 'Nenhum professor encontrado.' });
@@ -15,7 +20,12 @@ module.exports = {
   async indexOne(req, res) {
     const { id } = req.params;
 
-    const professor = await Professor.findByPk(id);
+    const professor = await Professor.findByPk(id, {
+      include: {
+        association: 'disciplinas',
+        attributes: ['id', 'nome_disciplina'],
+      },
+    });
 
     if (!professor) {
       return res.json({ erro: 'professor não encontrado.' });

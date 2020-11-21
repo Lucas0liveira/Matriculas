@@ -1,9 +1,27 @@
 /* eslint-disable camelcase */
 const Curso = require('../model/Curso');
+const Coordenador = require('../model/Coordenador');
+const Disciplina = require('../model/Disciplina');
 
 module.exports = {
   async indexAll(req, res) {
-    const curso = await Curso.findAll();
+    const curso = await Curso.findAll({
+      include: [
+        {
+          model: Coordenador,
+          as: 'coordenador',
+          attributes: ['id', 'nome', 'email'],
+        },
+        {
+          model: Disciplina,
+          as: 'disciplinas',
+          attributes: ['id', 'nome_disciplina'],
+          through: {
+            attributes: [],
+          },
+        },
+      ],
+    });
 
     if (!curso) {
       return res.status(400).json({ erro: 'Nenhum curso encontrado.' });
@@ -13,7 +31,23 @@ module.exports = {
   async indexOne(req, res) {
     const { id } = req.params;
 
-    const curso = await Curso.findByPk(id);
+    const curso = await Curso.findByPk(id, {
+      include: [
+        {
+          model: Coordenador,
+          as: 'coordenador',
+          attributes: ['id', 'nome', 'email'],
+        },
+        {
+          model: Disciplina,
+          as: 'disciplinas',
+          attributes: ['id', 'nome_disciplina'],
+          through: {
+            attributes: [],
+          },
+        },
+      ],
+    });
 
     if (!curso) {
       return res.status(400).json({ erro: 'Curso não encontrado.' });

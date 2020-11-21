@@ -13,7 +13,7 @@ class Coordenador extends Model {
   }
 
   static associate(models) {
-    this.hasOne(models.Curso, { foreignKey: 'id', as: 'id_coordenador' });
+    this.hasOne(models.Curso, { foreignKey: 'id', as: 'curso' });
   }
 }
 module.exports = Coordenador;

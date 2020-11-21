@@ -3,7 +3,12 @@ const Sala = require('../model/Sala');
 module.exports = {
 
   async indexAll(req, res) {
-    const sala = await Sala.findAll();
+    const sala = await Sala.findAll({
+      include: {
+        association: 'disciplinas',
+        attributes: ['id', 'nome_disciplina'],
+      },
+    });
 
     if (!sala) {
       return res.status(400).json({ erro: 'Nenhuma sala encontrada.' });
@@ -14,7 +19,12 @@ module.exports = {
   async indexOne(req, res) {
     const { numero } = req.params;
 
-    const sala = await Sala.findByPk(numero);
+    const sala = await Sala.findByPk(numero, {
+      include: {
+        association: 'disciplinas',
+        attributes: ['id', 'nome_disciplina'],
+      },
+    });
 
     if (!sala) {
       return res.status(400).json({ erro: 'Sala não encontrada.' });

@@ -14,6 +14,7 @@ routes.get('/aluno', AlunoController.indexAll);
 routes.get('/aluno/:id', AlunoController.indexOne);
 routes.post('/aluno', AlunoController.store);
 routes.put('/aluno/:id', AlunoController.update);
+routes.post('/aluno/:id', AlunoController.assign);
 routes.delete('/aluno/:id', AlunoController.delete);
 
 routes.get('/professor', ProfessorController.indexAll);
@@ -40,8 +41,5 @@ routes.get('/curso', CursoController.indexAll);
 routes.get('/curso/:id', CursoController.indexOne);
 routes.post('/curso', CursoController.store);
 routes.delete('/curso/:id', CursoController.delete);
-
-// routes.get('/curso', CursoController.indexAll);
-// routes.get('/curso/:id', CursoController.indexOne);
 
 module.exports = routes;

@@ -14,7 +14,7 @@ class Curso extends Model {
 
   static associate(models) {
     this.belongsTo(models.Coordenador, { foreignKey: 'id_coordenador', as: 'coordenador' });
-    this.belongsToMany(models.Disciplina, { foreignKey: 'id_curso', through: 'disciplina_curso', as: 'disciplina' });
+    this.belongsToMany(models.Disciplina, { foreignKey: 'id_curso', through: 'disciplina_curso', as: 'disciplinas' });
   }
 }
 module.exports = Curso;
